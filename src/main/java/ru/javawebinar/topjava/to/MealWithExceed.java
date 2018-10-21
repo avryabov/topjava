@@ -1,9 +1,10 @@
-package ru.javawebinar.topjava.model;
+package ru.javawebinar.topjava.to;
+
+import ru.javawebinar.topjava.model.AbstractBaseEntity;
 
 import java.time.LocalDateTime;
 
-public class MealWithExceed {
-    private final Integer id;
+public class MealWithExceed extends AbstractBaseEntity {
 
     private final LocalDateTime dateTime;
 
@@ -14,15 +15,11 @@ public class MealWithExceed {
     private final boolean exceed;
 
     public MealWithExceed(Integer id, LocalDateTime dateTime, String description, int calories, boolean exceed) {
-        this.id = id;
+        super(id);
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
         this.exceed = exceed;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public LocalDateTime getDateTime() {
