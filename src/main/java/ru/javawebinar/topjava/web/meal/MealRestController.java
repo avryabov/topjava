@@ -12,6 +12,8 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.SecurityUtil;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -55,10 +57,19 @@ public class MealRestController {
         return MealsUtil.getWithExceeded(service.getAll(userId), SecurityUtil.authUserCaloriesPerDay());
     }
 
-    public List<MealWithExceed> getBetweenDates(LocalDate startDate, LocalDate endDate) {
+    public List<MealWithExceed> getFiltered(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
         int userId = SecurityUtil.authUserId();
-        log.info("get all from {} to {} for userId={}", startDate, endDate, userId);
-        return MealsUtil.getWithExceeded(service.getBetweenDates(startDate, endDate, userId), SecurityUtil.authUserCaloriesPerDay());
+
+        if(startDate == null)
+            startDate = LocalDate.MIN;
+        if(endDate == null)
+            endDate = LocalDate.MAX;
+        if(startTime == null)
+            startTime = LocalTime.MIN;
+        if(endTime == null)
+            endTime = LocalTime.MAX;
+        log.info("get all from {} {} to {} {} for userId={}", startDate, startTime, endDate, endTime, userId);
+        return MealsUtil.getWithExceeded(service.getBetweenDateTimes(LocalDateTime.of(startDate, startTime), LocalDateTime.of(endDate, endTime), userId), SecurityUtil.authUserCaloriesPerDay());
     }
 
 }
