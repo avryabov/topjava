@@ -16,7 +16,7 @@ VALUES ('ROLE_USER', 100000),
        ('ROLE_ADMIN', 100001);
 
 INSERT INTO meals (user_id, date_time, description, calories)
-VALUES (100000, '2015-05-1 14:00:00', 'User dinner', 510),
-       (100000, '2015-05-1 21:00:00', 'User supper', 1500),
-       (100001, '2015-05-1 14:00:00', 'Admin dinner', 510),
-       (100001, '2015-05-1 20:20:20', 'Admin supper', 500);
+VALUES (100000, '2015-06-1 14:00:00', 'User dinner', 510),
+       (100000, '2015-06-1 21:00:00', 'User supper', 1500),
+       (100001, '2015-06-1 14:00:00', 'Admin dinner', 510),
+       (100001, '2015-06-1 20:20:00', 'Admin supper', 500);
