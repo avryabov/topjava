@@ -33,6 +33,6 @@ public class MealTestData {
     }
 
     public static void assertMatch(Iterable<Meal> actual, Iterable<Meal> expected) {
-        assertThat(actual).usingElementComparatorOnFields().isEqualTo(expected);
+        assertThat(actual).usingFieldByFieldElementComparator().isEqualTo(expected);
     }
 }
