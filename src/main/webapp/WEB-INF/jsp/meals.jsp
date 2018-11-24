@@ -14,6 +14,40 @@
 <div class="jumbotron pt-4">
     <div class="container">
         <h3><spring:message code="meal.title"/></h3>
+        <div class="card">
+            <div class="card-body py-0 border">
+                <form id="filter" class="my-0">
+                    <div class="row">
+                        <div class="offset-2 col-6">
+                            <div class="form-group">
+                                <label class="col-form-label" for="startDate"><spring:message
+                                        code="meal.startDate"/> </label>
+                                <input class="form-control col-6" type="date" name="startDate" id="startDate">
+                                <label class="col-form-label" for="endDate"><spring:message
+                                        code="meal.endDate"/></label>
+                                <input class="form-control col-6" type="date" name="endDate" id="endDate">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="col-form-label" for="startTime"><spring:message
+                                        code="meal.startTime"/></label>
+                                <input class="form-control col-6" type="time" name="startTime" id="startTime">
+                                <label class="col-form-label" for="endTime"><spring:message
+                                        code="meal.endTime"/></label>
+                                <input class="form-control col-6" type="time" name="endTime" id="endTime">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-right">
+                <button class="btn btn-primary" onclick="updateTable()">
+                    <span class="fa fa-filter"></span>
+                    <spring:message code="meal.filter"/>
+                </button>
+            </div>
+        </div>
         <br/>
         <button class="btn btn-primary" onclick="add()">
             <span class="fa fa-plus"></span>
@@ -32,11 +66,11 @@
             <c:forEach items="${meals}" var="meal">
                 <jsp:useBean id="meal" type="ru.javawebinar.topjava.to.MealTo"/>
                 <tr data-mealExcess="${meal.excess}">
-                <td>${fn:formatDateTime(meal.dateTime)}</td>
-                <td>${meal.description}</td>
-                <td>${meal.calories}</td>
-                <td><a><span class="fa fa-pencil"></span></a></td>
-                <td><a class="delete" id="${meal.id}"><span class="fa fa-remove"></span></a></td>
+                    <td>${fn:formatDateTime(meal.dateTime)}</td>
+                    <td>${meal.description}</td>
+                    <td>${meal.calories}</td>
+                    <td><a><span class="fa fa-pencil"></span></a></td>
+                    <td><a class="delete" id="${meal.id}"><span class="fa fa-remove"></span></a></td>
                 </tr>
             </c:forEach>
         </table>
