@@ -31,6 +31,7 @@ public class AdminAjaxController extends AbstractUserController {
 
     @Override
     @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
     }
@@ -42,10 +43,12 @@ public class AdminAjaxController extends AbstractUserController {
             result.getFieldErrors().forEach(
                     fe -> {
                         String msg = fe.getDefaultMessage();
-                        if (!msg.startsWith(fe.getField())) {
-                            msg = fe.getField() + ' ' + msg;
+                        if (msg != null) {
+                            if (!msg.startsWith(fe.getField())) {
+                                msg = fe.getField() + ' ' + msg;
+                            }
+                            joiner.add(msg);
                         }
-                        joiner.add(msg);
                     });
             return new ResponseEntity<>(joiner.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -59,6 +62,7 @@ public class AdminAjaxController extends AbstractUserController {
 
     @Override
     @PostMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void enable(@PathVariable("id") int id, @RequestParam("enabled") boolean enabled) {
         super.enable(id, enabled);
     }

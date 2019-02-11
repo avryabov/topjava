@@ -1,6 +1,7 @@
-let form;
+let context, form;
 
-function makeEditable() {
+function makeEditable(ctx) {
+    context = ctx;
     form = $('#detailsForm');
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
@@ -18,7 +19,7 @@ function add() {
 
 function updateRow(id) {
     $("#modalTitle").html(i18n["editTitle"]);
-    $.get(ajaxUrl + id, function (data) {
+    $.get(context.ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
         });
@@ -28,26 +29,26 @@ function updateRow(id) {
 
 function deleteRow(id) {
     $.ajax({
-        url: ajaxUrl + id,
+        url: context.ajaxUrl + id,
         type: "DELETE"
     }).done(function () {
-        updateTable();
+        context.updateTable();
         successNoty("common.deleted");
     });
 }
 
 function updateTableByData(data) {
-    datatableApi.clear().rows.add(data).draw();
+    context.datatableApi.clear().rows.add(data).draw();
 }
 
 function save() {
     $.ajax({
         type: "POST",
-        url: ajaxUrl,
+        url: context.ajaxUrl,
         data: form.serialize()
     }).done(function () {
         $("#editRow").modal("hide");
-        updateTable();
+        context.updateTable();
         successNoty("common.saved");
     });
 }
