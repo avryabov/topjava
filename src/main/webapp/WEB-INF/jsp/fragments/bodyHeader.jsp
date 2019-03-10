@@ -28,3 +28,5 @@
         </sec:authorize>
     </div>
 </nav>
+
+Language : <a href="${requestScope['javax.servlet.forward.request_uri']}?lang=en">English</a>|<a href="${requestScope['javax.servlet.forward.request_uri']}?lang=ru">Русский</a>
